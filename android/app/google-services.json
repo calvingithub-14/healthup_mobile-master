@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "872543967411",
+    "project_id": "healthup-mobile",
+    "storage_bucket": "healthup-mobile.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:872543967411:android:9da0a0d878611ad18178c6",
+        "android_client_info": {
+          "package_name": "com.example.healthup_mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZ2yEqqWWUhl15EZ7jguVFal-JKyYd3Wk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
