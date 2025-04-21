@@ -204,3 +204,7 @@ class _AdminHealthTipsState extends State<AdminHealthTips> {
     );
   }
 }
+
+void _showEditedDialog(String docId, Map<String, dynamic> tip){
+  
+}
