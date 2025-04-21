@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:healthup_mobile/healthTips.dart';
+//import 'package:healthup_mobile/healthTips.dart';
+import 'package:intl/intl.dart';
 
 class AdminHealthTips extends StatefulWidget {
 
@@ -203,8 +204,58 @@ class _AdminHealthTipsState extends State<AdminHealthTips> {
       ),
     );
   }
-}
 
-void _showEditedDialog(String docId, Map<String, dynamic> tip){
-  
+  void _showEditDialog(String docId, Map<String, dynamic> tip){
+    final editTitleController = TextEditingController(text: tip['title']);
+    final editCategoryController = TextEditingController(text: tip['category']);
+    String editStatus = tip['status'];
+
+    showDialog(
+      context: context, 
+      builder: (context) => AlertDialog(
+        title: Text("Edit"),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: editTitleController,
+              decoration: InputDecoration(labelText: 'Enter New Health Title'),
+              maxLines: 3,
+            ),
+            TextField(
+              controller: editCategoryController,
+              decoration: InputDecoration(labelText: 'Enter New Category'),
+            ),
+
+            DropdownButton<String>(
+              items: ['Active', 'Inactive'].map((String value){
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                  );
+              }).toList(), 
+              onChanged: (value) => editStatus = value!,
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context), 
+            child: Text("Cancel")
+          ),
+          TextButton(
+            onPressed: () async{
+              await _firestore.collection('healthTips').doc(docId).update({
+                'title': editTitleController.text,
+                'category': editCategoryController.text,
+                'status': editStatus,
+              });
+              Navigator.pop(context);
+            }, 
+            child: Text('Save Edit'),
+          ),
+        ],
+      ),
+    );
+  }
 }
